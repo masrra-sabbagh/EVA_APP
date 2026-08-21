@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Api;
+namespace App\Services;
 
 use App\Models\Notification as NotificationModel;
 use App\Models\User;
