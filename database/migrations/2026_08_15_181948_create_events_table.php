@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->id();
             $table->string('description');
             $table->enum('nature', ['static', 'dynamic']);
-            $table->enum('category', ['wedding', 'birthday', 'party']);
+            $table->enum('category', ['wedding', 'birthday', 'party', 'meeting', 'concert']);
             $table->string('city');
             $table->string('area');
             $table->date('start_date');

@@ -9,9 +9,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rule;
 
 class EventController extends Controller {
-    /**
-     * عرض فعالياتي (التي أنشأتها)
-     */
+    // عرض فعالياتي (التي أنشأتها)
     public function index(Request $request) {
         $user = $request->user();
 
@@ -23,21 +21,16 @@ class EventController extends Controller {
                 ]
             ], 401);
         }
-
         $events = Event::where('userId', $user->id)
             ->with('tasks')
             ->get();
-
         return response()->json([
             'success' => true,
             'message' => 'Your events retrieved successfully',
             'data' => $events
         ]);
     }
-
-    /**
-     * إنشاء فعالية جديدة
-     */
+    // إنشاء فعالية جديدة
     public function storeDynamic(Request $request) {
         try {
             $validated = $request->validate([
@@ -64,20 +57,15 @@ class EventController extends Controller {
             'end_date'    => $validated['end_date'],
             'userId' => $request->user()->id,
         ]);
-
         return response()->json([
             'success' => true,
             'message' => 'Event created successfully',
             'data' => $event
         ], 201);
     }
-
-    /**
-     * عرض تفاصيل فعالية
-     */
+    // عرض تفاصيل فعالية
     public function show(Request $request, $id) {
         $user = $request->user();
-
         if (!$user) {
             return response()->json([
                 'message' => 'Unauthenticated',
@@ -86,19 +74,16 @@ class EventController extends Controller {
                 ]
             ], 401);
         }
-
         $event = Event::where('id', $id)
             ->where('userId', $user->id)
             ->with(['tasks', 'bookings'])
             ->first();
-
         if (!$event) {
             return response()->json([
                 'success' => false,
                 'message' => 'Event not found'
             ], 404);
         }
-
         return response()->json([
             'success' => true,
             'data' => $event

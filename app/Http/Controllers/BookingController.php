@@ -109,8 +109,8 @@ class BookingController extends Controller {
             'userId'         => $request->user()->id,
             'eventId'        => $event->id,
             'booking_status' => 'confirmed', // مجاني = confirmed مباشرة
-            'start_date'     => $event->event_date,
-            'end_date'       => $event->event_date,
+            'start_date' => $event->start_date,
+            'end_date'   => $event->end_date,
             'total_price'    => 0,
             'paid_amount'    => 0,
             'is_refunded'    => false,
